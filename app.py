@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Estilos CSS ligeros
+# Estilos CSS personalizados para el Marco con Degradado
 st.markdown("""
     <style>
     .main .block-container {
@@ -20,6 +20,48 @@ st.markdown("""
     }
     .stButton>button {
         width: 100%;
+    }
+    
+    /* Marco con borde degradado */
+    .gradient-frame {
+        position: relative;
+        padding: 24px 30px;
+        border-radius: 16px;
+        background: #ffffff;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        margin-bottom: 25px;
+        border: 3px solid transparent;
+        background-clip: padding-box;
+    }
+    
+    /* Borde en degradado usando un pseudoelemento */
+    .gradient-frame::before {
+        content: '';
+        position: absolute;
+        top: -3px; right: -3px; bottom: -3px; left: -3px;
+        z-index: -1;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+    }
+
+    /* Adaptación para modo oscuro */
+    @media (prefers-color-scheme: dark) {
+        .gradient-frame {
+            background: #0e1117;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    .title-text {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        color: inherit;
+    }
+    .subtitle-text {
+        font-size: 1.05rem;
+        color: #6b7280;
+        margin: 0;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -44,9 +86,13 @@ with st.sidebar:
     st.markdown("---")
     st.caption("Powered by `gpt-4o` 🚀")
 
-# 3. Panel Principal
-st.title("Visión por Computadora con IA 🤖🖼️")
-st.write("Sube cualquier imagen para obtener un análisis descriptivo detallado o haz preguntas específicas sobre ella.")
+# 3. Panel Principal con Marco Degradado en el Título
+st.markdown("""
+    <div class="gradient-frame">
+        <div class="title-text">Análisis de Imagen con IA 🤖🖼️</div>
+        <p class="subtitle-text">Sube cualquier imagen para obtener un análisis descriptivo detallado o haz preguntas específicas sobre ella en tiempo real.</p>
+    </div>
+""", unsafe_allow_html=True)
 
 st.markdown("---")
 
